@@ -45,8 +45,6 @@ class MessageController extends Controller
     public function sendMessage(MessageRequest $request) {
         $message = new Message();
         $message->from = auth()->user()->id;
-//        $message->to = $request->keys('to');
-//        $message->body = $request->json('body');
         $message->fill($request->all());
 
         $message->save();
