@@ -7,7 +7,7 @@ use App\Message;
 
 class MessageController extends Controller
 {
-    public function index()    {
+    public function index()   {
 
             $messages = Message::latest()->get();
 
@@ -36,9 +36,21 @@ class MessageController extends Controller
             return response()->json($message, 200);
         }
 
-    public function destroy($id)   {
+    public function destroy($id) {
 
             Message::destroy($id);
             return response()->json(null, 204);
+        }
+
+    public function sendMessage(MessageRequest $request) {
+        $message = new Message();
+        $message->from = auth()->user()->id;
+//        $message->to = $request->keys('to');
+//        $message->body = $request->json('body');
+        $message->fill($request->all());
+
+        $message->save();
+        return response()->json(['message' => 'sent']);
+
         }
 }
