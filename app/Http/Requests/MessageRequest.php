@@ -6,11 +6,19 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class MessageRequest extends FormRequest
     {
-        public function authorize()    {
-            return true;
+        public function rules()    {
+            return [
+                'to' => 'required',
+                'body' => 'required'
+            ];
         }
 
-        public function rules()    {
-            return [];
+        public function authorize()    {
+            if (auth()->check()) {
+                return true;
+            }
+            else {
+                return false;
+            }
         }
 }
