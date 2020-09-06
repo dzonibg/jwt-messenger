@@ -22,4 +22,10 @@ Route::get('/', 'AuthController@index');
 Route::post('/register', 'AuthController@register');
 Route::post('/login', 'AuthController@login')->name('login');
 Route::post('/user', 'AuthController@user')->middleware('auth:api');
-Route::post('/logout', 'AuthController@logout')->middleware('auth:api');Route::resource('messages', 'MessageController');
+Route::post('/logout', 'AuthController@logout')->middleware('auth:api');
+
+Route::resource('message', 'MessageController');
+Route::post('/message/send', 'MessageController@sendMessage');
+Route::post('/message/last', 'MessageController@lastMessage');
+Route::post('/message/unread', 'MessageController@unreadMessages');
+Route::post('/message/check', 'MessageController@checkMessages');
