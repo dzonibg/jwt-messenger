@@ -26,3 +26,6 @@ Route::post('/logout', 'AuthController@logout')->middleware('auth:api');
 
 Route::resource('message', 'MessageController');
 Route::post('/message/send', 'MessageController@sendMessage');
+Route::post('/message/last', 'MessageController@lastMessage');
+Route::post('/message/unread', 'MessageController@unreadMessages');
+Route::post('/message/check', 'MessageController@checkMessages');

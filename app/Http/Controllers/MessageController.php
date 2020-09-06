@@ -48,7 +48,25 @@ class MessageController extends Controller
         $message->fill($request->all());
 
         $message->save();
-        return response()->json(['message' => 'sent']);
-
+        return response()->json(['message' => 'sent'], 201);
         }
+
+        public function lastMessage() {
+        $user_id = auth()->user()->id;
+        $message = Message::whereTo($user_id)->latest()->limit(1)->get();
+        return response()->json($message);
+        }
+
+        public function unreadMessages() {
+        $user_id = auth()->user()->id;
+        $messages = Message::whereTo($user_id)->where('read', '=', 0)->get();
+        return response()->json($messages);
+        }
+
+        public function checkMessages() {
+        $user_id = auth()->user()->id;
+        $messages = Message::whereTo($user_id)->where('read', '=', 0)->count();
+        return response()->json(['unread' => $messages], 200);
+        }
+
 }
