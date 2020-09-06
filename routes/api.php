@@ -24,5 +24,5 @@ Route::post('/login', 'AuthController@login')->name('login');
 Route::post('/user', 'AuthController@user')->middleware('auth:api');
 Route::post('/logout', 'AuthController@logout')->middleware('auth:api');
 
-Route::resource('messages', 'MessageController');
+Route::resource('message', 'MessageController');
 Route::post('/message/send', 'MessageController@sendMessage');
