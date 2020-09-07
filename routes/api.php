@@ -29,3 +29,4 @@ Route::post('/message/send', 'MessageController@sendMessage');
 Route::post('/message/last', 'MessageController@lastMessage');
 Route::post('/message/unread', 'MessageController@unreadMessages');
 Route::post('/message/check', 'MessageController@checkMessages');
+Route::post('/message/get', 'MessageController@getMessage');
