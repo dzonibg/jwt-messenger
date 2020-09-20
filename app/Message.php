@@ -23,6 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereTo($value)
  * @method static \Illuminate\Database\Eloquent\Builder|Message whereUpdatedAt($value)
  * @mixin \Eloquent
+ * @property int $read
+ * @method static \Illuminate\Database\Eloquent\Builder|Message whereRead($value)
  */
 class Message extends Model {
 
