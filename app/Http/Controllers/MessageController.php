@@ -45,8 +45,8 @@ class MessageController extends Controller
     public function sendMessage(MessageRequest $request) {
         $message = new Message();
         $message->from = auth()->user()->id;
+        $message->from_name = auth()->user()->name;
         $message->fill($request->all());
-
         $message->save();
         return response()->json(['message' => 'sent'], 201);
         }
@@ -66,13 +66,14 @@ class MessageController extends Controller
         public function checkMessages() {
         $user_id = auth()->user()->id;
         $messages = Message::whereTo($user_id)->where('read', '=', 0)->count();
-        return response()->json(['unread' => $messages], 200);
+        return response()->json([
+            'unread' => $messages
+        ], 200);
         }
 
         public function getMessage() {
         $user_id = auth()->user()->id;
         $message = Message::whereTo($user_id)->where('read', '=', 0)->first();
-        $message_id = $message->id;
         Message::findOrFail($message->id)->update(['read' => true]);
         return response()->json($message, 200);
         }
